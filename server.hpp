@@ -12,8 +12,12 @@
 #include <nlohmann/json.hpp>
 #include <fifo_map.hpp>
 #include <fstream>
+#include <cstdlib>
+#include <signal.h>
 
-#define READ_STRING(f) std::string((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>())
+#define STRING_READ(f) std::string((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>())
+
+std::ofstream logfile;
 
 using namespace nlohmann;
 
@@ -52,15 +56,26 @@ _json getJSONHeaders(sockaddr_in client, std::string _header) {
 }
 
 
-
 _json serverlog;
+
+void exit_handler(int s) {
+	logfile << serverlog.dump(4);
+	logfile.close();
+	exit(0);
+}
+
 struct HTTPServer {
 	int fd = -1;
 	unsigned int n = 1;
 	std::function <void(sockaddr_in, int, _json, unsigned int)> callback;
-	std::ofstream logfile;
 
 	HTTPServer(std::string port, std::string _logfile) {
+		struct sigaction sigIntHandler;
+		sigIntHandler.sa_handler = exit_handler;
+		sigemptyset(&sigIntHandler.sa_mask);
+		sigIntHandler.sa_flags = 0;
+		sigaction(SIGINT, &sigIntHandler, NULL);
+
 		logfile.open(_logfile.c_str());
 		struct addrinfo hint, *res, *i;
 		std::memset(&hint, 0, sizeof(hint));
@@ -91,39 +106,32 @@ struct HTTPServer {
 		}
 		struct sockaddr_in client;
 		size_t addrlen = sizeof(client);
-		try {
-			for(;;) {
-				int clientfd = accept(fd, (struct sockaddr*) &client, &addrlen);
-				if(clientfd < 0) {
-					perror("listen() error");
-					exit(1);
-				}
 
-				char* buff = (char*)malloc(65535);
-				int rcvd = recv(clientfd, buff, 65535, 0);
+		for(;;) {
+			int clientfd = accept(fd, (struct sockaddr*) &client, &addrlen);
+			if(clientfd < 0) {
+				perror("listen() error");
+				exit(1);
+			}
 
-				if(rcvd < 0)
-					write(2, "recv() failed\n", 13);
-				else if (rcvd == 0)
-					write(2, "Client disconnected unexpectedly.\n", 34);
-				else {
-					auto headers = getJSONHeaders(client, std::string(buff,rcvd));
-					serverlog[std::to_string(n)] = headers;
-					n++;
-					if(fork() == 0) {
-						callback(client, clientfd, headers, n);
-						close(clientfd);
-						exit(0);
-					} else {
-						close(clientfd);
-					}
+			char* buff = (char*)malloc(65535);
+			int rcvd = recv(clientfd, buff, 65535, 0);
+			if(rcvd < 0)
+				write(2, "recv() failed\n", 13);
+			else if (rcvd == 0)
+				write(2, "Client disconnected unexpectedly.\n", 34);
+			else {
+				auto headers = getJSONHeaders(client, std::string(buff,rcvd));
+				serverlog[std::to_string(n)] = headers;
+				n++;
+				if(fork() == 0) {
+					callback(client, clientfd, headers, n);
+					close(clientfd);
+					exit(0);
+				} else {
+					close(clientfd);
 				}
 			}
-		}
-		catch (...) {
-			logfile << serverlog;
-			logfile.close();
-			exit(1);
 		}
 	}
 };
