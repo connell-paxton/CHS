@@ -6,8 +6,11 @@
 #include <nlohmann/json.hpp>
 #include <fifo_map.hpp>
 #include <ctime>
+//#include <chaiscript/chaiscript>
 
 // TODO: add chaiscripting
+
+//chaiscript::ChaiScript chai;
 
 using namespace nlohmann;
 
@@ -18,17 +21,20 @@ using _json   = nlohmann::basic_json<_fifo_map>;
 
 std::string exec(std::string command) {
 	auto p = popen(command.c_str(), "r");
-	char buffer[4096];
-	int len = fread(buffer, 4096, 4096, p);
+	std::string ret;
+	signed char c;
+	while((c = fgetc(p)) != EOF){
+		ret += c;
+	}
 	pclose(p);
-	return std::string(buffer, len);
+	return ret;
 };
 
 void send(int fd, const _json& _res) {
 	std::string res =
-		"HTTP/1.1" + std::string(_res["status"]) + "\r\n"
+		"HTTP/1.1 " + std::string(_res["status"]) + "\r\n"
 		"Content-Length: "+ std::to_string(std::string(_res["content"]).length()) + "\r\n"
-		"Content-Type: " + std::string(_res["type"]) + "\r\n\r\n"
+		"Content-Type: " + std::string(_res["type"]) + " utf-8\r\n\r\n"
 		+ std::string(_res["content"]);
 	write(fd, res.c_str(), res.length());
 }
@@ -45,9 +51,11 @@ int main() {
 	std::ifstream _head("resources/header.html");
 	std::string head = STRING_READ(_head);
 	_head.close();
-	std::ifstream _src("main.cpp");
-	std::string src = STRING_READ(_src);
-	_src.close();
+	std::ifstream _src2("main.cpp");
+	std::ifstream _src1("server.hpp");
+	std::string src = "<h2>server.hpp</h2><hr><pre id=\"src\" style=\"border-style:dot-cut\"><" "xmp style=\"border-style:dot-cut; margin: 2 \">\n" + STRING_READ(_src1) + "</xm" "p>\n\n<h2>main.cpp</h1><hr><xm" "p>" + STRING_READ(_src2) + "</" "xmp></pre>";
+	_src1.close();
+	_src2.close();
 	std::ifstream _romanes("resources/romanes_raw.html");
 	std::string romanes = STRING_READ(_romanes);
 	_romanes.close();
@@ -65,10 +73,11 @@ int main() {
 			res["content"] = serverlog.dump(4);
 		}},
 		{"/src" , [&head, &src](const auto& req, auto& res){
-			auto script = R"(<script>
-					document.getElementById('src').innerHTML = (document.getElementById('src').innerHTML.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;'))
-					;</script>)";
-			res["content"] = script + head + "<pre><code id=\"src\">" +  src + "</code></pre>";
+			res["content"] =  head + src;
+			//res["type"] = "text/plain";
+		}},
+		{"/hello", [](const auto& req, auto& res){
+			res.merge_patch(json::parse(exec("cgi-bin/helloworld")));
 		}},
 		{"/romanes" , [&head, &romanes](const auto& req, auto& res){
 			res["content"] = head + romanes;
@@ -80,7 +89,7 @@ int main() {
 		_json res;
 		res["status"] = "200 OK";
 		res["type"] = "text/html";
-		res["content"] = "nothing here yet, go yell at Qonnell to get things working again!";
+		res["content"] = "nothing here yet, go yell at Qonnell to get things working again!\n";
 		get_handler(handler, req["path"])(req,res);
 		send (clientfd, res);
 

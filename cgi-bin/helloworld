@@ -1,0 +1,9 @@
+#!/usr/bin/python
+import json
+import sys
+
+header = {
+	"content" : sys.stdin.read(),
+	"type" : "text/html",
+}
+print(json.dumps(header));
