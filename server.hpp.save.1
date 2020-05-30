@@ -39,19 +39,17 @@ _json getJSONHeaders(sockaddr_in client, std::string _header) {
 	std::string temp;
 	req >> temp;
 	header["address"] = addr;
-	header["method"] = temp;
 	req >> temp;
 	header["path"] = temp;
 	req >> temp;
+	header["method"] = temp;
+	req >> temp;
 	header["version"] = temp;
 	while(std::getline(req, temp, ':')){
-		std::string key = temp;
 		if(temp == "\r\n") break;
+		std::string key = temp;
 		std::getline(req, temp);
-		if(key[0] == '\r') {
-			key = key.substr(2, temp.size()-2);
-		}
-		temp = temp.substr(1, temp.size()-2);
+		temp.pop_back();
 		header[key] = temp;
 	}
 	return header;
@@ -116,8 +114,8 @@ struct HTTPServer {
 				exit(1);
 			}
 
-			char buff[8*1024];
-			int rcvd = recv(clientfd, buff, 8*1024, 0);
+			char buff[1024];
+			int rcvd = recv(clientfd, buff, 1024*88, 0);
 			if(rcvd < 0)
 				write(2, "recv() failed\n", 13);
 			else if (rcvd == 0)

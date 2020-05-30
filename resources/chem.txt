@@ -1,0 +1,83 @@
+Sources:
+A
+https://www.scientificamerican.com/article/how-was-avogadros-number/
+B
+https://www.sciencehistory.org/historical-profile/robert-boyle
+https://www.thoughtco.com/formula-for-boyles-law-604280
+https://www.differenttruths.com/science-technology/how-did-robert-boyle-discover-a-law-that-was-named-after-him/
+C
+https://www.convertunits.com/molarmass/Carbon
+[IMAGE] https://www.alaskajournal.com/sites/alaskajournal.com/files/field/photos/graphic-3.large_.jpeg
+D
+https://www.khanacademy.org/science/chemistry/gases-and-kinetic-molecular-theory/ideal-gas-laws/a/daltons-law-of-partial-pressure
+https://www.britannica.com/science/Daltons-law
+E
+[IMAGE] https://secretmuseum.net/wp-content/uploads/2019/10/europe-elevation-map-europe-topographic-map-climatejourney-org-of-europe-elevation-map.jpg
+https://www.britannica.com/science/europium
+https://education.jlab.org/itselemental/ele063.html
+F
+[IMAGE] https://periodic.lanl.gov/images/fermium-ytterbium-alloy.jpg
+https://periodic.lanl.gov/100.shtml
+https://www.rsc.org/periodic-table/element/100/fermium
+G
+https://www.chemicool.com/elements/gallium.html
+https://www.chemistrylearner.com/gallium.html
+[IMAGE] https://www.chemistrylearner.com/wp-content/uploads/2018/07/Liquid-Gallium.jpg
+H
+[IMAGE] https://blog.csiro.au/wp-content/uploads/2016/07/up-helium-1024x560.jpg
+https://www.britannica.com/science/helium-chemical-element
+I
+https://pubchem.ncbi.nlm.nih.gov/compound/Iodide-ion
+J
+https://www.britannica.com/science/joule
+https://www.thoughtco.com/definition-of-joule-604543
+K
+[IMAGE] https://i.ytimg.com/vi/LLTSXgQeCyk/maxresdefault.jpg
+https://www.britannica.com/science/krypton-chemical-element
+L
+[IMAGE] https://www.chemistrylearner.com/wp-content/uploads/2018/06/Lanthanum.jpg
+https://www.rsc.org/periodic-table/element/57/lanthanum
+M
+https://www.britannica.com/science/magnesium
+[IMAGE] https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/CSIRO_ScienceImage_2893_Crystalised_magnesium.jpg
+N
+[IMAGE] https://mynameisneon.files.wordpress.com/2014/11/neon-lights-neon-signs.jpg
+https://www.britannica.com/science/neon
+O
+[IMAGE] https://earthclinic.com/wp-content/uploads/2018/10/lungs.jpg  
+*NOTE: I WOULD NOT USE THIS AS A SOURCE FOR ANYTHING OTHER THAN AN IMAGE, NOR WOULD I RECOMMEND USING IT FOR ANYTHING OTHER THAN AS AN IMAGE*
+https://www.rsc.org/periodic-table/element/8/
+P
+https://www.rsc.org/periodic-table/element/94/
+[IMAGE] https://parkercountyblog.files.wordpress.com/2016/01/emp_attack.jpg?w=620
+Q
+https://pubchem.ncbi.nlm.nih.gov/compound/Quinine
+[IMAGE] https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid=1065&t=l
+R
+[IMAGE] https://upload.wikimedia.org/wikipedia/commons/8/88/Radium_Dial.jpg
+https://www.britannica.com/science/radium
+S
+https://www.britannica.com/science/silicon
+https://sciencetrends.com/the-charge-of-a-carbon-ion/
+[IMAGE] https://uk.pi-supply.com/products/raspberry-pi-zero-w
+T
+[IMAGE] https://www.dakotamatrix.com/images/products/tellurium32721a.jpg
+https://www.rsc.org/periodic-table/element/52/tellurium
+U
+[IMAGE] https://www.chemistrylearner.com/wp-content/uploads/2018/07/Uranium-Pictures.jpg
+https://www.britannica.com/science/uranium
+V
+https://www.britannica.com/science/vanadium
+[IMAGE] https://www.miningreview.com.au/wp-content/uploads/2018/11/vanadium-2.jpg
+W
+https://chem.libretexts.org/Bookshelves/Ancillary_Materials/Exemplars_and_Case_Studies/Exemplars/Foods/Weak_Acids
+https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Acids_and_Bases/Ionization_Constants/Weak_Acids_and_Bases_1
+X
+https://www.britannica.com/science/xenon
+[IMAGE]https://images-of-elements.com/xenon-2.jpg
+Y
+[IMAGE] https://upload.wikimedia.org/wikipedia/commons/c/ce/Ytterbium-3.jpg
+https://www.britannica.com/science/ytterbium
+Z
+[IMAGE] https://www.usacoinbook.com/us-coins/1982-d-small-date-lincoln-memorial-cent.jpg
+https://www.britannica.com/science/zinc

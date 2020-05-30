@@ -34,7 +34,7 @@ void send(int fd, const _json& _res) {
 	std::string res =
 		"HTTP/1.1 " + std::string(_res["status"]) + "\r\n"
 		"Content-Length: "+ std::to_string(std::string(_res["content"]).length()) + "\r\n"
-		"Content-Type: " + std::string(_res["type"]) + " utf-8\r\n\r\n"
+		"Content-Type: " + std::string(_res["type"]) + "; charset=utf-8\r\n\r\n"
 		+ std::string(_res["content"]);
 	write(fd, res.c_str(), res.length());
 }
@@ -48,9 +48,14 @@ auto get_handler = [](auto handler, auto handle){
 };
 
 int main() {
+	std::ifstream _pub("qonnell.key");
+	std::string pub = STRING_READ(_pub);
 	std::ifstream _head("resources/header.html");
 	std::string head = STRING_READ(_head);
 	_head.close();
+	std::ifstream _jim("resources/jim.html");
+	std::string jim = STRING_READ(_jim);
+	_jim.close();
 	std::ifstream _src2("main.cpp");
 	std::ifstream _src1("server.hpp");
 	std::string src = "<h2>server.hpp</h2><hr><pre id=\"src\" style=\"border-style:dot-cut\"><" "xmp style=\"border-style:dot-cut; margin: 2 \">\n" + STRING_READ(_src1) + "</xm" "p>\n\n<h2>main.cpp</h1><hr><xm" "p>" + STRING_READ(_src2) + "</" "xmp></pre>";
@@ -63,6 +68,7 @@ int main() {
 	std::map<std::string, std::function<void(const _json&, _json&)>> handler = {
 		{"/" , [&head](const auto& req, auto& res) {
 			res["content"] = head + "<h2>Welcome</h2>";
+			res["type"] = "text/html";
 		}},
 		{"default" , [&head](const auto& req, auto& res){
 			res["content"] = head + "<h3>404 File Not Found</h3><i>Sorry, your princess is in another village</i>";
@@ -81,7 +87,24 @@ int main() {
 		}},
 		{"/romanes" , [&head, &romanes](const auto& req, auto& res){
 			res["content"] = head + romanes;
+			res["type"] = "text/html";
 		}},
+		{"/pub", [&pub](const auto& req, auto& res){
+			res["content"] = pub;
+			res["type"] = "text/plain";
+		}},
+		{"/chem", [](const auto& req, auto& res){
+			res["content"] = "<html><head><style>img{height: 200px;width: 200px;}</style></head><body><center>" + exec("cgi-bin/process.pl resources/chem.txt") + "</body></html>";
+			res["type"] = "text/html";
+		}},
+		{"/chem.txt", [](const auto& req, auto& res) {
+			res["content"] = exec("cat resources/chem.txt");
+			res["type"] = "text/plain";
+		}},
+		{"/jim", [&jim](const auto& req, auto& res) {
+			res["content"] = jim;
+			res["type"] = "text/html";
+		}}
 	};
 
 	localhost.callback = [&](sockaddr_in client, int clientfd, _json req, unsigned int n){

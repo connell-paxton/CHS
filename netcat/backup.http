@@ -1,0 +1,14 @@
+#!/bin/bash
+if [[ -z $@ ]]; then
+CONTENT=`cat <<CONTENT
+<h1>HELLO WORLD! </h1>
+CONTENT`
+
+PACKET=`cat <<PACKET
+HTTP/1.1 200 NOT BAD\r\nContent-Type: text/html\r\nContent-Length: ${#CONTENT}\r\n\r\n$CONTENT
+PACKET`
+while true; do echo -e $PACKET | nc -l 90 -k; done
+else
+echo -e 'HTTP/1.1 200 NOT BAD\r\nContent-Type: text/plain\r\nServer: Static Netcat\r\n\r\n' > header
+cat header $1 | nc -l 90 -k
+fi
