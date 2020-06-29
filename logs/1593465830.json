@@ -1,0 +1,47 @@
+{
+    "1": {
+        "address": "127.0.0.1",
+        "method": "GET",
+        "path": "/",
+        "version": "HTTP/1.1",
+        "Host": "localhost",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
+        "DNT": "1",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Cache-Control": "max-age=0"
+    },
+    "2": {
+        "address": "127.0.0.1",
+        "method": "GET",
+        "path": "/romanes",
+        "version": "HTTP/1.1",
+        "Host": "localhost",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
+        "DNT": "1",
+        "Connection": "keep-alive",
+        "Referer": "http://localhost/",
+        "Upgrade-Insecure-Requests": "1"
+    },
+    "3": {
+        "address": "127.0.0.1",
+        "method": "GET",
+        "path": "/",
+        "version": "HTTP/1.1",
+        "Host": "localhost",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
+        "DNT": "1",
+        "Connection": "keep-alive",
+        "Referer": "http://localhost/romanes",
+        "Upgrade-Insecure-Requests": "1"
+    }
+}

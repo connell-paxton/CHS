@@ -107,7 +107,7 @@ struct HTTPServer {
 			exit(1);
 		}
 		struct sockaddr_in client;
-		size_t addrlen = sizeof(client);
+		socklen_t addrlen = sizeof(client);
 
 		for(;;) {
 			int clientfd = accept(fd, (struct sockaddr*) &client, &addrlen);
